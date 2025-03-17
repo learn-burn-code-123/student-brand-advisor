@@ -6,7 +6,8 @@ from datetime import datetime
 import io
 
 # 设置模拟模式（不需要加载大型模型）
-SIMULATION_MODE = False
+# 在 Render 上部署时使用模拟模式，以避免内存问题
+SIMULATION_MODE = True
 
 app = Flask(__name__)
 

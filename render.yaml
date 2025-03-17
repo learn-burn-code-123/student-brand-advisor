@@ -3,8 +3,12 @@ services:
     name: student-brand-advisor
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: gunicorn app:app --log-file -
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
+      - key: SIMULATION_MODE
+        value: "True"
     plan: free
+    healthCheckPath: /
+    autoDeploy: true
