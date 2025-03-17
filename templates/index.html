@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生个人品牌顾问</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>学生个人品牌顾问</h1>
+            <p class="subtitle">探索你在AI时代的个人品牌定位</p>
+        </header>
+
+        <main>
+            <div id="intro-section" class="section">
+                <h2>欢迎使用学生个人品牌顾问</h2>
+                <p>在AI迅速发展的时代，建立独特的个人品牌变得至关重要。通过回答一系列关于你的学术兴趣、热情、目标和抱负的问题，我们将使用先进的AI技术为你生成一份个性化的报告，帮助你了解如何建立适合你的个人品牌。</p>
+                <button id="start-btn" class="btn primary-btn">开始评估</button>
+            </div>
+
+            <div id="questionnaire-section" class="section hidden">
+                <form id="questionnaire-form">
+                    <div class="form-header">
+                        <h2>个人信息</h2>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-name">你的名字</label>
+                        <input type="text" id="student-name" name="student-name" placeholder="请输入你的名字（选填）">
+                    </div>
+
+                    <div class="form-header">
+                        <h2>问卷调查</h2>
+                        <p>请回答以下问题，帮助我们更好地了解你</p>
+                    </div>
+
+                    <div id="questions-container">
+                        {% for question in questions %}
+                        <div class="form-group question-group" data-question-id="{{ question.id }}">
+                            <label for="question-{{ question.id }}">{{ question.text }}</label>
+                            <textarea 
+                                id="question-{{ question.id }}" 
+                                name="question-{{ question.id }}" 
+                                placeholder="{{ question.placeholder }}"
+                                rows="4"></textarea>
+                            <div class="question-progress">问题 {{ question.id }}/{{ questions|length }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="prev-btn" class="btn secondary-btn" disabled>上一题</button>
+                        <button type="button" id="next-btn" class="btn primary-btn">下一题</button>
+                        <button type="submit" id="submit-btn" class="btn primary-btn hidden">生成报告</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="loading-section" class="section hidden">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <h2>正在生成你的个人品牌报告</h2>
+                    <p>这可能需要几分钟时间，请耐心等待...</p>
+                </div>
+            </div>
+
+            <div id="report-section" class="section hidden">
+                <div class="report-header">
+                    <h2>你的个人品牌报告</h2>
+                    <p class="report-timestamp">生成时间：<span id="report-time"></span></p>
+                </div>
+                <div class="report-content" id="report-content">
+                    <!-- 报告内容将在这里动态插入 -->
+                </div>
+                <div class="report-actions">
+                    <button id="download-btn" class="btn primary-btn">
+                        <i class="fas fa-download"></i> 下载报告
+                    </button>
+                    <button id="restart-btn" class="btn secondary-btn">
+                        <i class="fas fa-redo"></i> 重新开始
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>基于Llama 3开源模型</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/lib/jspdf.umd.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
