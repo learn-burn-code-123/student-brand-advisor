@@ -6,7 +6,7 @@ from datetime import datetime
 import io
 
 # 设置模拟模式（不需要加载大型模型）
-SIMULATION_MODE = True
+SIMULATION_MODE = False
 
 app = Flask(__name__)
 

@@ -1,11 +1,10 @@
 flask==2.3.3
 gunicorn==21.2.0
 
-# Optional dependencies for non-simulation mode
-# Uncomment these if you want to use the actual LLM model
-# transformers==4.36.2
-# torch==2.1.2
-# sentencepiece==0.1.99
-# accelerate==0.25.0
-# protobuf==4.25.1
-# jieba==0.42.1
+# Dependencies for Llama 3 LLM model
+transformers==4.36.2
+torch==2.1.2
+sentencepiece==0.1.99
+accelerate==0.25.0
+protobuf==4.25.1
+jieba==0.42.1
