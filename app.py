@@ -245,4 +245,6 @@ if __name__ == '__main__':
         print(f"预加载模型失败: {e}")
         print("应用将在第一次请求时加载模型")
     
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    # Get port from environment variable (Render sets this) or default to 5001
+    port = int(os.environ.get('PORT', 5001))
+    app.run(debug=False, host='0.0.0.0', port=port)
